@@ -10,3 +10,16 @@ pytz==2020.5
 sqlparse==0.4.1
 typing-extensions==3.10.0.2
 zipp==3.6.0
+asgiref==3.3.1
+Django==3.1.5
+django-cleanup==5.1.0
+django-cors-headers==3.6.0
+django-environ==0.7.0
+djangorestframework==3.12.2
+importlib-metadata==4.8.1
+Markdown==3.3.4
+Pillow==8.1.0
+pytz==2020.5
+sqlparse==0.4.1
+typing-extensions==3.10.0.2
+zipp==3.6.0
