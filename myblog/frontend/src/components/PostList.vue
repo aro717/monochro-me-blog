@@ -7,8 +7,9 @@
           <figure>
             <img :src="post.thumbnail" :alt="post.title" class="thumbnail">
           </figure>
-          <p class="post-category" :style="{'color': post.category.color}">{{post.category.name}}</p>
+          <p class="post-date">{{dayjs(post.created_at)}}</p>
           <h2 class="post-title">{{post.title}}</h2>
+          <p class="post-category" :style="{'color': post.category.color}">{{post.category.name}}</p>
           <p class="post-lead">{{post.lead_text}}</p>
         </article>
       </router-link>
@@ -25,6 +26,7 @@
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import { UPDATE_POSTS } from '@/store/mutation-types'
+import dayjs from 'dayjs'
 
 export default {
   name: 'post-list',
@@ -39,7 +41,7 @@ export default {
     this.getPosts()
   },
   mounted () {
-    document.title = 'ブログ'
+    document.title = 'Monochro-me'
     document.querySelector('meta[name="description"]').setAttribute('content', '日々の雑記')
   },
   computed: {
@@ -86,6 +88,9 @@ export default {
         .then(data => {
           this[UPDATE_POSTS](data)
         })
+    },
+    dayjs: function (date) {
+      return dayjs(date).format('YYYY/MM/DD')
     }
   }
 }
@@ -113,7 +118,7 @@ section {
   display: block;
 }
 
-.post-category {
+.post-date {
   margin-top: 25px;
   font-size: 12px;
 }
@@ -122,6 +127,11 @@ section {
   font-weight: bold;
   font-size: 14px;
   width: 100%;
+}
+
+.post-category {
+  margin-top: 5px;
+  font-size: 12px;
 }
 
 .post-lead {

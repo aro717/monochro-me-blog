@@ -2,8 +2,8 @@
   <article :key="id" class="container" v-if="post">
     <header>
       <nav id="back"><a @click="goBack" title="前ページへ戻る"><img src="@/assets/back.png"></a></nav>
-      <p class="post-category" :style="{'color': post.category.color}">{{post.category.name}}</p>
       <h1 class="post-title">{{post.title}}</h1>
+      <p class="post-category" :style="{'color': post.category.color}">{{post.category.name}}</p>
     </header>
     <div id="main">
       <nav id="toc" ref="toc"></nav>
@@ -40,7 +40,7 @@ export default {
       })
       .then(data => {
         this.post = data
-        document.title = `${data.title} - ブログ`
+        document.title = `${data.title} - Blog`
         document.querySelector('meta[name="description"]').setAttribute('content', data.lead_text)
         this.$nextTick(() => this.moveToc())
       })
