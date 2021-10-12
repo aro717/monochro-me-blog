@@ -10,18 +10,25 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
-from pathlib import Path
-import environ
+# from pathlib import Path
+# import environ
 import os
 
-BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-env = environ.Env()
-environ.Env.read_env(Path.joinpath(BASE_DIR, '.env'))
+try:
+    from .local_settings import *
+except ImportError:
+    pass
 
-SECRET_KEY = env('SECRET_KEY')
+DEBUG = True
 
-DEBUG = env('DEBUG')
+# BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
+# env = environ.Env()
+# environ.Env.read_env(Path.joinpath(BASE_DIR, '.env'))
+# SECRET_KEY = env('SECRET_KEY')
+# DEBUG = env('DEBUG')
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
@@ -40,6 +47,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_cleanup.apps.CleanupConfig',
     'rest_framework',
 ]
 
