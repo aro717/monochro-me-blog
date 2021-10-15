@@ -82,12 +82,6 @@ export default {
           displayAlign: 'center',
           displayIndent: '2em'
         })
-        window.MathJax.Hub.Config({
-          'HTML-CSS': {
-            availableFonts: ['TeX'],
-            undefinedFamily: 'Raleway, Helvetica, Arial, sans-serif'
-          }
-        })
         window.MathJax.Hub.Queue(['Typeset', window.MathJax.Hub])
       }
     }
