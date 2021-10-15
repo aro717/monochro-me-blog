@@ -15,6 +15,8 @@
 </template>
 
 <script>
+// import { VueMathjax } from 'vue-mathjax'
+
 export default {
   name: 'post',
   props: {
@@ -34,13 +36,14 @@ export default {
     })
   },
   mounted () {
+    this.renderMathJax()
     this.$http(`${this.$httpPosts}${this.id}/`, { credentials: 'include' })
       .then(response => {
         return response.json()
       })
       .then(data => {
         this.post = data
-        document.title = `${data.title} - Blog`
+        document.title = `${data.title} - Monochro-me`
         document.querySelector('meta[name="description"]').setAttribute('content', data.lead_text)
         this.$nextTick(() => this.moveToc())
       })
@@ -63,6 +66,30 @@ export default {
       const innerToc = this.$refs.text.querySelector('div.toc')
       const cloneToc = innerToc.cloneNode(true)
       this.$refs.toc.appendChild(cloneToc)
+    },
+    renderMathJax () {
+      if (window.MathJax) {
+        window.MathJax.Hub.Config({
+          TeX: { equationNumbers: { autoNumber: 'AMS' } },
+          tex2jax: {
+            inlineMath: [
+              ['$', '$'],
+              ['\\(', '\\)']
+            ],
+            processEscapes: true
+          },
+          'HTML-CSS': { matchFontHeight: false },
+          displayAlign: 'center',
+          displayIndent: '2em'
+        })
+        window.MathJax.Hub.Config({
+          'HTML-CSS': {
+            availableFonts: ['TeX'],
+            undefinedFamily: 'Raleway, Helvetica, Arial, sans-serif'
+          }
+        })
+        window.MathJax.Hub.Queue(['Typeset', window.MathJax.Hub])
+      }
     }
   }
 }
@@ -149,6 +176,10 @@ header {
 
 #post-main >>> div.toc {
   display: none;
+}
+
+#post-main >>> p {
+  text-indent: 1em;
 }
 
 #toc {

@@ -125,7 +125,7 @@ section {
 
 .post-title {
   font-weight: bold;
-  font-size: 14px;
+  font-size: 16px;
   width: 100%;
 }
 
