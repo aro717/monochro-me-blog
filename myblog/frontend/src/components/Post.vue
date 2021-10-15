@@ -48,6 +48,9 @@ export default {
         this.$nextTick(() => this.moveToc())
       })
   },
+  created () {
+    this.renderMathJax()
+  },
   methods: {
     goBack () {
       if (this.hasBefore) {
@@ -82,6 +85,7 @@ export default {
           displayAlign: 'center',
           displayIndent: '2em'
         })
+        
         window.MathJax.Hub.Queue(['Typeset', window.MathJax.Hub])
       }
     }
