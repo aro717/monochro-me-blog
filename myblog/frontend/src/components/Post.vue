@@ -2,8 +2,10 @@
   <article :key="id" class="container" v-if="post">
     <header>
       <nav id="back"><a @click="goBack" title="前ページへ戻る"><img src="@/assets/back.png"></a></nav>
-      <span class="post-is_public" v-if="!post.is_public">非公開</span>
-      <span class="post-date">{{dayjs(post.created_at)}}</span>
+      <span class="post-date">
+        <span class="post-is_public" v-if="!post.is_public">非公開</span>
+        {{dayjs(post.created_at)}}
+      </span>
       <h1 class="post-title">{{post.title}}</h1>
       <p class="post-category" :style="{'color': post.category.color}">{{post.category.name}}</p>
     </header>

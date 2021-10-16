@@ -7,10 +7,10 @@
           <figure>
             <img :src="post.thumbnail" :alt="post.title" class="thumbnail">
           </figure>
-          <p class="post-date">
+          <span class="post-date">
             <span class="post-is_public" v-if="!post.is_public">非公開</span>
             {{dayjs(post.created_at)}}
-          </p>
+          </span>
           <h2 class="post-title">{{post.title}}</h2>
           <p class="post-category" :style="{'color': post.category.color}">{{post.category.name}}</p>
           <p class="post-lead">{{post.lead_text}}</p>
