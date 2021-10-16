@@ -20,8 +20,8 @@ export default {
 
 <style scoped>
 footer {
-  background-color: #999;
-  color: #000;
+  background-color: #000;
+  color: #fff;
   padding: 0 20px;
   margin-top: 160px;
 }
@@ -32,7 +32,7 @@ ul > li {
 }
 
 ul a {
-  color: #000;
+  color: #fff;
   text-decoration: none;
 }
 
