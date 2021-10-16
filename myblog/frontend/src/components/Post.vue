@@ -2,6 +2,7 @@
   <article :key="id" class="container" v-if="post">
     <header>
       <nav id="back"><a @click="goBack" title="前ページへ戻る"><img src="@/assets/back.png"></a></nav>
+      <span class="post-date">{{dayjs(post.created_at)}}</span>
       <h1 class="post-title">{{post.title}}</h1>
       <p class="post-category" :style="{'color': post.category.color}">{{post.category.name}}</p>
     </header>
@@ -15,7 +16,7 @@
 </template>
 
 <script>
-// import { VueMathjax } from 'vue-mathjax'
+import dayjs from 'dayjs'
 
 export default {
   name: 'post',
@@ -75,10 +76,8 @@ export default {
         window.MathJax.Hub.Config({
           TeX: { equationNumbers: { autoNumber: 'AMS' } },
           tex2jax: {
-            inlineMath: [
-              ['$', '$'],
-              ['\\(', '\\)']
-            ],
+            inlineMath: [['$', '$'], ['\\(', '\\)']],
+            displayMath: [['$$', '$$'], ['\\[', '\\]']],
             processEscapes: true
           },
           'HTML-CSS': { matchFontHeight: false },
@@ -87,6 +86,9 @@ export default {
         })
         window.MathJax.Hub.Queue(['Typeset', window.MathJax.Hub])
       }
+    },
+    dayjs: function (date) {
+      return dayjs(date).format('YYYY/MM/DD')
     }
   }
 }
@@ -118,10 +120,18 @@ header {
   font-size: 20px;
 }
 
+.post-date {
+  margin-left: -5px;
+  padding-left: 5px;
+  border-left: solid 2px #f92672;
+}
+
 .post-title {
-  color: #fff;
   font-weight: bold;
   font-size: 28px;
+  margin-left: -5px;
+  padding-left: 5px;
+  border-left: solid 2px #fd971f;
 }
 
 .divider {
@@ -134,14 +144,13 @@ header {
 }
 
 #post-main {
-  color: #fff;
   width: 100%;
   line-height: 2;
 }
 
 #main >>> div.toc a {
   font-size: 12px;
-  color: #666666;
+  color: #a6e22e;
   text-decoration: none;
 }
 
@@ -168,7 +177,7 @@ header {
 }
 
 #post-main >>> strong {
-  background-color: yellow;
+  color: #66d9ef;
 }
 
 #post-main >>> div.toc {
@@ -177,6 +186,16 @@ header {
 
 #post-main >>> p {
   text-indent: 1em;
+}
+
+#post-main >>> a {
+  color: #f92672;
+}
+
+#post-main >>> blockquote {
+  color: #e6bd74;
+  padding-left: 5px;
+  border-left: solid 3px #75715e;
 }
 
 #toc {

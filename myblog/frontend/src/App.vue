@@ -31,7 +31,8 @@ main {
 }
 
 body {
-  background-color: #444;
+  background-color: #272822;
+  color: #f8f8f2;
   font-family: fot-tsukuardgothic-std, sans-serif;
   line-height: 1.5;
   font-size: 14px;

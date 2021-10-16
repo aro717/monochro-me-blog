@@ -58,8 +58,8 @@ export default {
 
 <style scoped>
 header {
-  background-color: #fff;
-  color: #000;
+  background-color: #f8f8f2;
+  color: #272822;
   height: 50px;
   display: grid;
   grid-template-columns: 20px 1fr 20px;
@@ -80,7 +80,7 @@ h1 {
 }
 
 h1 > a {
-  color: #000;
+  color: #272822;
   text-decoration: none;
 }
 
@@ -96,7 +96,7 @@ h1 > a {
   border-top: none;
   border-left: none;
   background-color: transparent;
-  color: #000;
+  color: #272822;
   width: 200px;
   margin-left: 20px;
   padding-left: 6px;

@@ -7,7 +7,10 @@
           <figure>
             <img :src="post.thumbnail" :alt="post.title" class="thumbnail">
           </figure>
-          <p class="post-date">{{dayjs(post.created_at)}}</p>
+          <p class="post-date">
+            <span class="post-is_public" v-if="!post.is_public">非公開</span>
+            {{dayjs(post.created_at)}}
+          </p>
           <h2 class="post-title">{{post.title}}</h2>
           <p class="post-category" :style="{'color': post.category.color}">{{post.category.name}}</p>
           <p class="post-lead">{{post.lead_text}}</p>
@@ -98,7 +101,7 @@ export default {
 
 <style scoped>
 #lead {
-  color: #999999;
+  color: #e6bd74;
 }
 
 section {
@@ -113,20 +116,17 @@ section {
 
 .post {
   text-decoration: none;
-  color: #fff;
   margin-bottom: 80px;
   display: block;
-}
-
-.post-date {
-  margin-top: 25px;
-  font-size: 12px;
 }
 
 .post-title {
   font-weight: bold;
   font-size: 16px;
   width: 100%;
+  margin-left: -5px;
+  padding-left: 5px;
+  border-left: solid 2px #fd971f;
 }
 
 .post-category {
@@ -139,6 +139,20 @@ section {
   width: 100%;
 }
 
+.post-date {
+  margin-top: 10px;
+  font-size: 12px;
+  margin-left: -5px;
+  padding-left: 5px;
+  border-left: solid 2px #f92672;
+}
+
+.post-is_public {
+  background-color: #75715e;
+  margin-top: 10px;
+  font-size: 12px;
+}
+
 .divider {
   margin-top: 50px;
   margin-bottom: 25px;
@@ -149,7 +163,7 @@ section {
 }
 
 #page {
-  color: #999;
+  color: #e6bd74;
 }
 
 #back {

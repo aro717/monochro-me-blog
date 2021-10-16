@@ -6,7 +6,7 @@ from django.utils import timezone
 
 class Category(models.Model):
     name = models.CharField('カテゴリ名', max_length=100)
-    color = models.CharField('色(16進数)', max_length=7, default='#999999')
+    color = models.CharField('色(16進数)', max_length=7, default='#75715e')
 
     def __str__(self):
         return self.name
