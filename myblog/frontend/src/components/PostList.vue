@@ -125,6 +125,7 @@ section {
   font-weight: bold;
   font-size: 16px;
   width: 100%;
+  margin-top: 5px;
   margin-left: -5px;
   padding-left: 5px;
   border-left: solid 2px #fd971f;
@@ -142,7 +143,6 @@ section {
 
 .post-date {
   margin-top: 10px;
-  margin-bottom: 10px;
   font-size: 12px;
   margin-left: -5px;
   padding-left: 5px;
