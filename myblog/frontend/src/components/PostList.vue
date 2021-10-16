@@ -115,6 +115,7 @@ section {
 }
 
 .post {
+  color: #f8f8f2;
   text-decoration: none;
   margin-bottom: 80px;
   display: block;
@@ -141,6 +142,7 @@ section {
 
 .post-date {
   margin-top: 10px;
+  margin-bottom: 10px;
   font-size: 12px;
   margin-left: -5px;
   padding-left: 5px;
