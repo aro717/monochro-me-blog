@@ -1,22 +1,24 @@
 <template>
-    <div id="app">
-        <Header/>
-        <main>
-          <transition appear>
-            <router-view/>
-          </transition>
-        </main>
-        <Footer/>
-    </div>
+  <div id="app">
+    <Header/>
+    <main>
+      <transition appear>
+        <router-view/>
+      </transition>
+      <Nav/>
+    </main>
+    <Footer/>
+  </div>
 </template>
 
 <script>
 import Header from './components/Header'
 import Footer from './components/Footer'
+import Nav from './components/Nav'
 
 export default {
   name: 'app',
-  components: { Header, Footer }
+  components: { Header, Footer, Nav }
 }
 </script>
 
@@ -28,6 +30,18 @@ export default {
 
 main {
   min-height: calc(100vh - 290px);
+  display: grid;
+  grid-template-columns: 20px 1fr 20px;
+}
+
+main > * {
+  grid-column: 2;
+}
+
+Nav {
+  display: none;
+  grid-column: 3;
+  margin-left: 20px;
 }
 
 body {
@@ -61,16 +75,28 @@ body {
 }
 
 @media (min-width: 768px) {
+  main {
+    grid-template-columns: 1fr 540px 160px 1fr;
+  }
+
+  Nav {
+    display: block;
+  }
+
   .container {
-    width: 700px;
+    width: 540px;
     padding: 0;
     margin: 0 auto;
   }
 }
 
 @media (min-width: 1024px) {
+  main {
+    grid-template-columns: 1fr 820px 160px 1fr;
+  }
+
   .container {
-    width: 980px;
+    width: 820px;
   }
 }
 </style>

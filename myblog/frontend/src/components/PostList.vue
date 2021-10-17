@@ -138,6 +138,7 @@ section {
 .post-lead {
   margin-top: 10px;
   width: 100%;
+  overflow-wrap: break-word;
 }
 
 .post-date {
@@ -182,14 +183,14 @@ section {
 @media (min-width: 768px) {
   section {
     display: grid;
-    grid-template-columns: 340px 340px;
+    grid-template-columns: 260px 260px;
     column-gap: 20px;
     row-gap: 100px;
   }
 
   .thumbnail {
-    width: 340px;
-    height: 212px;
+    width: 260px;
+    height: 260px;
     object-fit: cover;
   }
 
@@ -198,11 +199,11 @@ section {
   }
 
   .post-title {
-    width: 280px;
+    width: 215px;
   }
 
   .post-lead {
-    width: 280px;
+    width: 215px;
   }
 
   .divider {
@@ -212,20 +213,20 @@ section {
 
 @media (min-width: 1024px) {
   section {
-    grid-template-columns: 480px 480px;
+    grid-template-columns: 400px 400px;
   }
 
   .thumbnail {
-    width: 480px;
-    height: 300px;
+    width: 400px;
+    height: 400px;
   }
 
   .post-title {
-    width: 440px;
+    width: 360px;
   }
 
   .post-lead {
-    width: 440px;
+    width: 360px;
   }
 }
 </style>
