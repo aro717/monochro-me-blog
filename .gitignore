@@ -2,6 +2,6 @@ __pycache__
 db.sqlite3
 .DS_Store
 .env
-mysite/local_settings.py
+local_settings.py
 node_modules/
 frontend/
