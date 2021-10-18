@@ -24,15 +24,15 @@ export default {
   data () {
     // URL内のGETパラメータを参照
     return {
-      keyword: this.$router.query.keyword || '',
-      selected: this.$router.query.category || ''
+      keyword: this.$route.query.keyword || '',
+      selected: this.$route.query.category || ''
     }
   },
   watch: {
     // サイトタイトルクリックでトップページに戻る
     '$route' () {
-      this.keyword = this.$router.query.keyword || ''
-      this.selected = this.$router.query.category || ''
+      this.keyword = this.$route.query.keyword || ''
+      this.selected = this.$route.query.category || ''
     }
   },
   created () {
