@@ -40,7 +40,6 @@ export default {
     })
   },
   mounted () {
-    this.renderMathJax()
     this.$http(`${this.$httpPosts}${this.id}/`, { credentials: 'include' })
       .then(response => {
         return response.json()
@@ -50,10 +49,8 @@ export default {
         document.title = `${data.title} - Monochro-me`
         document.querySelector('meta[name="description"]').setAttribute('content', data.lead_text)
         this.$nextTick(() => this.moveToc())
+        this.$nextTick(() => this.renderMathJax())
       })
-  },
-  created () {
-    this.renderMathJax()
   },
   methods: {
     goBack () {

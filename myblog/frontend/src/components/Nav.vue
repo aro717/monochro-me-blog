@@ -27,7 +27,7 @@ export default {
       })
   },
   computed: {
-    ...mapGetters(['categoryList'])
+    ...mapGetters(['postList'], ['categoryList'])
   },
   methods: {
     ...mapActions([UPDATE_CATEGORIES, UPDATE_POSTS]),

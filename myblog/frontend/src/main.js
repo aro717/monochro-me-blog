@@ -17,6 +17,6 @@ new Vue({
 }).$mount('#app')
 
 Vue.use(VueAnalytics, {
-  id: 'UA-72333380-3',
+  id: 'UA-',
   router
 })
