@@ -22,7 +22,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     # path('', include('myblog.urls')),
     path('blog/', include('myblog.urls')),
-    path('markdownx/', include('markdownx.urls')),
+    # path('markdownx/', include('markdownx.urls')),
+    path('markdownx/', include(('markdownx.urls','markdownx'))),
 ]
 
 urlpatterns += static(
