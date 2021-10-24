@@ -133,7 +133,7 @@ USE_TZ = True
 
 MARKDOWNX_MARKDOWN_EXTENSIONS = [
     'markdown.extensions.extra',
-    # 'markdown.extensions.toc',
+    'markdown.extensions.toc',
 ]
 
 STATIC_URL = '/static/'
