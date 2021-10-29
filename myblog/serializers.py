@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import Category, Post
+from django.utils.safestring import mark_safe
 from markdownx.utils import markdownify
 # import markdown
 
@@ -28,5 +29,5 @@ class PostSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
     def get_main_text(self, instance):
-        return markdownify(instance.main_text)
+        return mark_safe(markdownify(instance.main_text))
         # return markdown.markdown(instance.main_text, extensions=['markdown.extensions.toc'])
