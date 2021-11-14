@@ -42,6 +42,7 @@ ALLOWED_HOSTS = ['aro.pythonanywhere.com', '127.0.0.1']
 
 INSTALLED_APPS = [
     'myblog.apps.MyblogConfig',
+    'myuploader.apps.MyuploaderConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -145,6 +146,7 @@ if DEBUG:
     MIDDLEWARE = ['corsheaders.middleware.CorsMiddleware'] + MIDDLEWARE
     CORS_ORIGIN_WHITELIST = (
         'http://192.168.3.5:8080',
+        'http://127.0.0.1:8080',
         'http://localhost:8080',
     )
     CORS_ALLOW_CREDENTIALS = True
