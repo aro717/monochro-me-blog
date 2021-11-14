@@ -13,6 +13,7 @@ class Composite(models.Model):
 
     class Meta:
         ordering = ('-is_dir', 'name')
+        app_label = 'myuploader'
 
     def __str__(self):
         if self.is_dir:
