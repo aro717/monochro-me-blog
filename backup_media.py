@@ -16,5 +16,5 @@ def upload_all_files(path):
 
 
 print(now, 'backup start')
-upload_all_files(Path('/var/www/html/media'))
+upload_all_files(Path('./media'))
 print(datetime.datetime.now(), 'backup end')
