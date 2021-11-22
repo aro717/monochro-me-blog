@@ -5,8 +5,6 @@ from .models import Post, Category
 from .permissions import IsPublicPost, IsSuperUser
 from .serializers import CategorySerializer, PostSerializer, SimplePostSerializer
 
-# Create your views here.
-
 
 class StandardResultsSetPagination(pagination.PageNumberPagination):
     page_size = 10

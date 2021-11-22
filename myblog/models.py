@@ -2,15 +2,30 @@ from django.db import models
 from django.utils import timezone
 from markdownx.models import MarkdownxField
 
-# Create your models here.
+
+class CategoryManager(models.Manager):
+    def get_queryset(self):
+        return super().get_queryset().annotate(
+            post_count=models.Count('post')
+        ).order_by('-post_count')
 
 
 class Category(models.Model):
     name = models.CharField('カテゴリ名', max_length=100)
     color = models.CharField('色(16進数)', max_length=7, default='#75715e')
 
+    objects = CategoryManager()
+
     def __str__(self):
-        return self.name
+        if hasattr(self, 'post_count'):
+            return f'{self.name}({self.post_count})'
+        else:
+            return self.name
+
+
+class PostQuerySet(models.QuerySet):
+    def published(self):
+        return self.filter(created_at__lte=timezone.now())
 
 
 class Post(models.Model):
@@ -22,6 +37,8 @@ class Post(models.Model):
     main_text = MarkdownxField('本文', help_text='Markdown形式で記入')
     is_public = models.BooleanField('公開可能か', default=True)
     created_at = models.DateTimeField('作成日', default=timezone.now)
+
+    objects = PostQuerySet.as_manager()
 
     class Meta:
         ordering = ('-created_at',)
