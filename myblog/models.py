@@ -44,4 +44,7 @@ class Post(models.Model):
         ordering = ('-created_at',)
 
     def __str__(self):
-        return self.title
+        if self.is_public:
+            return self.title
+        else:
+            return f'(非公開){self.title}'
