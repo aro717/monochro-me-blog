@@ -22,6 +22,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('blog/', include('myblog.urls')),
     path('uploader/', include('myuploader.urls')),
+    path('sitedetail/', include('mysitedetail.urls')),
     path('markdownx/', include(('markdownx.urls', 'markdownx'))),
 ]
 
