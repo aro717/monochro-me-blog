@@ -51,7 +51,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_cleanup.apps.CleanupConfig',
     'rest_framework',
-    'markdownx'
+    'markdownx',
+    'django.contrib.sites',
+    'mysiteinfo.apps.MysiteinfoConfig',
 ]
 
 MIDDLEWARE = [
@@ -137,6 +139,7 @@ MARKDOWNX_MARKDOWN_EXTENSIONS = [
     'markdown.extensions.toc',
 ]
 
+SITE_ID = 1
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 MEDIA_URL = '/media/'
