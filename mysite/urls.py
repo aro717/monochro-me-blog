@@ -17,6 +17,14 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
+from django.contrib.sitemaps.views import sitemap
+from myblog.sitemaps import PostSitemap, StaticSitemap
+
+
+sitemaps = {
+    'posts': PostSitemap,
+    'static': StaticSitemap,
+}
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -24,6 +32,7 @@ urlpatterns = [
     path('uploader/', include('myuploader.urls')),
     path('sitedetail/', include('mysitedetail.urls')),
     path('markdownx/', include(('markdownx.urls', 'markdownx'))),
+    path('sitemap.xml/', sitemap, {'sitemaps': sitemaps},  name='sitemap'),
 ]
 
 urlpatterns += static(

@@ -4,6 +4,9 @@ from .filters import IsPublicOrSuperAll, PostSearch
 from .models import Post, Category
 from .permissions import IsPublicPost, IsSuperUser
 from .serializers import CategorySerializer, PostSerializer, SimplePostSerializer
+from django.contrib.auth.decorators import login_required
+from django.contrib.sitemaps import ping_google
+from django.shortcuts import redirect
 
 
 class StandardResultsSetPagination(pagination.PageNumberPagination):
@@ -43,3 +46,14 @@ class PostDetail(generics.RetrieveAPIView):
 
 class Top(generic.TemplateView):
     template_name = 'myblog/index.html'
+
+
+@login_required
+def ping(request):
+    try:
+        url = resolve('sitemap')
+        ping_google(sitemap_url=url)
+    except Exception:
+        raise
+    else:
+        return redirect('top')

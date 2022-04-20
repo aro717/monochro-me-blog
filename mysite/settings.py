@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'markdownx',
     'django.contrib.sites',
+    'django.contrib.sitemaps',
     'mysitedetail.apps.MysitedetailConfig'
 ]
 

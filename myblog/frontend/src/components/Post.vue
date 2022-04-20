@@ -14,6 +14,10 @@
       <div id="post-main" ref="text" v-html="post.main_text"></div>
     </div>
     <hr class="divider">
+    <div id="relation-posts">
+      <h2 class="title">関連記事</h2>
+    </div>
+    <hr class="divider">
     <nav id="top"><a @click="scrollTop" title="一番上まで戻る"><img src="@/assets/ue.png"></a></nav>
   </article>
 </template>
@@ -54,6 +58,7 @@ export default {
           Render.hljs.highlightAll()
           Render.renderMathJax()
           this.moveToc()
+          this.setRelatePost()
         })
       })
   },
@@ -78,6 +83,27 @@ export default {
     },
     dayjs: function (date) {
       return dayjs(date).format('YYYY/MM/DD')
+    },
+    setRelatePost () {
+      let isFound = false // 関連記事の作成
+      const pathList = new Set() // URLのpath部分が詰まったセット
+      const ulElement = document.createElement('ul')
+
+      // 記事中のa要素を1つずつ取り出す
+      for (const a of document.querySelectorAll('article.container #post-main p a')) {
+        const url = new URL(a.href)
+        // ドメインは同じだが、パス部分がこの記事と違っていて、まだ追加していないa要素を関連記事として登録
+        if (url.hostname === document.domain && url.pathname !== location.pathname && !pathList.has(url.pathname)) {
+          const liElement = document.createElement('li')
+          liElement.appendChild(a.cloneNode(true))
+          ulElement.appendChild(liElement)
+          pathList.add(url.pathname)
+          isFound = true
+        }
+      }
+      if (isFound) {
+        document.getElementById('relation-posts').appendChild(ulElement)
+      }
     }
   }
 }

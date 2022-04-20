@@ -9,4 +9,5 @@ urlpatterns = [
     path('api/categories/', views.CategoryList.as_view(), name='category_list'),
     path('', views.Top.as_view(), name='top'),
     path('<path:path>', views.Top.as_view(), name='top_sub'),
+    path('ping/', views.ping, name='ping'),
 ]
