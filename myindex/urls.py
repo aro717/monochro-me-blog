@@ -4,5 +4,5 @@ from . import views
 app_name = 'myindex'
 
 urlpatterns = [
-    path('', views.index, name='index'),
+    path('', views.LinkList.as_view(), name='index'),
 ]

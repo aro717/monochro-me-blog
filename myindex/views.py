@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.views import generic
+from .models import Link
 
 
-def index(request):
-    return render(request, 'index.html')
+class LinkList(generic.ListView):
+    model = Link
