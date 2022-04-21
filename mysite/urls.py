@@ -33,6 +33,7 @@ urlpatterns = [
     path('sitedetail/', include('mysitedetail.urls')),
     path('markdownx/', include(('markdownx.urls', 'markdownx'))),
     path('sitemap.xml/', sitemap, {'sitemaps': sitemaps},  name='sitemap'),
+    path('', include('myindex.urls')),
 ]
 
 urlpatterns += static(

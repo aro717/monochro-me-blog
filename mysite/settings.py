@@ -43,6 +43,7 @@ ALLOWED_HOSTS = ['aro.pythonanywhere.com', '127.0.0.1']
 INSTALLED_APPS = [
     'myblog.apps.MyblogConfig',
     'myuploader.apps.MyuploaderConfig',
+    'myindex.apps.MyindexConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
