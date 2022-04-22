@@ -32,7 +32,7 @@ urlpatterns = [
     path('uploader/', include('myuploader.urls')),
     path('sitedetail/', include('mysitedetail.urls')),
     path('markdownx/', include(('markdownx.urls', 'markdownx'))),
-    path('sitemap.xml/', sitemap, {'sitemaps': sitemaps},  name='sitemap'),
+    path('sitemap.xml', sitemap, {'sitemaps': sitemaps},  name='sitemap'),
     path('', include('myindex.urls')),
 ]
 
