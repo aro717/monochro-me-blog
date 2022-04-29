@@ -33,10 +33,10 @@ class Post(models.Model):
     thumbnail = models.ImageField('サムネイル', blank=True, null=True)
     category = models.ForeignKey(Category, on_delete=models.PROTECT, verbose_name='カテゴリ')
     lead_text = models.TextField('紹介文')
-    # main_text = models.TextField('本文')
     main_text = MarkdownxField('本文', help_text='Markdown形式で記入')
     is_public = models.BooleanField('公開可能か', default=True)
     created_at = models.DateTimeField('作成日', default=timezone.now)
+    relation_posts = models.ManyToManyField('self', verbose_name='関連記事', blank=True)
 
     objects = PostQuerySet.as_manager()
 
@@ -48,3 +48,26 @@ class Post(models.Model):
     #         return self.title
     #     else:
     #         return f'(非公開){self.title}'
+
+    def __str__(self):
+        return self.title
+
+
+class Comment(models.Model):
+    name = models.CharField('名前', max_length=255, default='名無し')
+    text = models.TextField('本文')
+    target = models.ForeignKey(Post, on_delete=models.CASCADE, verbose_name='対象記事')
+    created_at = models.DateTimeField('作成日', default=timezone.now)
+
+    def __str__(self):
+        return self.text[:20]
+
+
+class Reply(models.Model):
+    name = models.CharField('名前', max_length=255, default='名無し')
+    text = models.TextField('本文')
+    target = models.ForeignKey(Comment, on_delete=models.CASCADE, verbose_name='対象コメント')
+    created_at = models.DateTimeField('作成日', default=timezone.now)
+
+    def __str__(self):
+        return self.text[:20]

@@ -13,9 +13,14 @@
       <nav id="toc" ref="toc"></nav>
       <div id="post-main" ref="text" v-html="post.main_text"></div>
     </div>
-    <hr class="divider">
     <div id="relation-posts">
-      <h2 class="title">関連記事</h2>
+      <h1 class="title">関連記事</h1>
+      <div class="relation-post" v-for="item in post.relation_posts" :key="item">
+        <h2><router-link :to="{name: 'detail', params: {id: item.id}}">{{item.title}}</router-link></h2>
+        <p>{{ item.lead_text }}</p>
+        <p>{{dayjs(item.created_at)}}</p>
+        <p class="relation-post-category" :style="{'color': post.category.color}">{{item.category.name}}</p>
+      </div>
     </div>
     <hr class="divider">
     <nav id="top"><a @click="scrollTop" title="一番上まで戻る"><img src="@/assets/ue.png"></a></nav>
@@ -38,6 +43,11 @@ export default {
       hasBefore: false
     }
   },
+  watch: {
+    '$route' (to, from) {
+      this.fetchItems(to.params.id)
+    }
+  },
   beforeRouteEnter (to, from, next) {
     next(component => {
       if (from.name) {
@@ -58,7 +68,7 @@ export default {
           Render.hljs.highlightAll()
           Render.renderMathJax()
           this.moveToc()
-          this.setRelatePost()
+          // this.setRelatePost()
         })
       })
   },
@@ -84,27 +94,46 @@ export default {
     dayjs: function (date) {
       return dayjs(date).format('YYYY/MM/DD')
     },
-    setRelatePost () {
-      let isFound = false // 関連記事の作成
-      const pathList = new Set() // URLのpath部分が詰まったセット
-      const ulElement = document.createElement('ul')
-
-      // 記事中のa要素を1つずつ取り出す
-      for (const a of document.querySelectorAll('article.container #post-main p a')) {
-        const url = new URL(a.href)
-        // ドメインは同じだが、パス部分がこの記事と違っていて、まだ追加していないa要素を関連記事として登録
-        if (url.hostname === document.domain && url.pathname !== location.pathname && !pathList.has(url.pathname)) {
-          const liElement = document.createElement('li')
-          liElement.appendChild(a.cloneNode(true))
-          ulElement.appendChild(liElement)
-          pathList.add(url.pathname)
-          isFound = true
-        }
-      }
-      if (isFound) {
-        document.getElementById('relation-posts').appendChild(ulElement)
-      }
+    move (item) {
+      this.$emit('relation_post', item)
+    },
+    fetchItems (id) {
+      this.$http(`${this.$httpPosts}${id}/`, { credentials: 'include' })
+        .then(response => {
+          return response.json()
+        })
+        .then(data => {
+          this.post = data
+          document.title = `${data.title} - ${this.site.title}`
+          document.querySelector('meta[name="description"]').setAttribute('content', data.lead_text)
+          this.$nextTick(() => {
+            Render.hljs.highlightAll()
+            Render.renderMathJax()
+            this.moveToc()
+          })
+        })
     }
+    // setRelatePost () {
+    //   let isFound = false // 関連記事の作成
+    //   const pathList = new Set() // URLのpath部分が詰まったセット
+    //   const ulElement = document.createElement('ul')
+
+    //   // 記事中のa要素を1つずつ取り出す
+    //   for (const a of document.querySelectorAll('article.container #post-main p a')) {
+    //     const url = new URL(a.href)
+    //     // ドメインは同じだが、パス部分がこの記事と違っていて、まだ追加していないa要素を関連記事として登録
+    //     if (url.hostname === document.domain && url.pathname !== location.pathname && !pathList.has(url.pathname)) {
+    //       const liElement = document.createElement('li')
+    //       liElement.appendChild(a.cloneNode(true))
+    //       ulElement.appendChild(liElement)
+    //       pathList.add(url.pathname)
+    //       isFound = true
+    //     }
+    //   }
+    //   if (isFound) {
+    //     document.getElementById('relation-posts').appendChild(ulElement)
+    //   }
+    // }
   }
 }
 </script>
@@ -267,6 +296,22 @@ header {
   font-size: 16px;
   background: #272822;
   font-weight: bold;
+}
+
+#relation-posts >>> a {
+  color: #f92672;
+}
+
+#relation-posts >>> h1 {
+  margin-top: 100px;
+  margin-bottom: 10px;
+  border-bottom: solid 1px #ccc;
+  padding-bottom: 10px;
+}
+
+#relation-posts >>> .relation-post {
+  margin-bottom: 10px;
+  padding-left: 10px;
 }
 
 @media (min-width: 768px) {

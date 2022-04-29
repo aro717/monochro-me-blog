@@ -12,8 +12,17 @@ class CategorySerializer(serializers.ModelSerializer):
         fields = ('id', 'name', 'color',)
 
 
+class RelationPostSerializer(serializers.ModelSerializer):
+    category = CategorySerializer(read_only=True)
+    
+    class Meta:
+        model = Post
+        fields = ('id', 'category', 'title', 'lead_text', 'created_at',)
+
+
 class SimplePostSerializer(serializers.ModelSerializer):
     category = CategorySerializer(read_only=True)
+    relation_posts = RelationPostSerializer(read_only=True, many=True)
 
     class Meta:
         model = Post
@@ -23,6 +32,7 @@ class SimplePostSerializer(serializers.ModelSerializer):
 class PostSerializer(serializers.ModelSerializer):
     category = CategorySerializer(read_only=True)
     main_text = serializers.SerializerMethodField()
+    relation_posts = RelationPostSerializer(read_only=True, many=True)
 
     class Meta:
         model = Post

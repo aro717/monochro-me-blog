@@ -93,7 +93,7 @@ header > * {
   margin: 0 0 0 auto;
 }
 
-#rl > img {
+#rl >>> img {
   width: 100%;
   height: auto;
 }
