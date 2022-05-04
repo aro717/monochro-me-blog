@@ -11,7 +11,7 @@ class PostSitemap(Sitemap):
         return Post.objects.all()
 
     def location(self, obj):
-        return resolve_url('myblog:post_detail', pk=obj.pk)
+        return resolve_url('myblog:post_detail', pk=obj.pk).replace('api/posts', 'detail')
 
     def lastmod(self, obj):
         return obj.created_at
